@@ -101,14 +101,6 @@ class WaveAlgorithm:
             # print('\t\tevaluating:', path, t)
             max_load = max(loads)
             path_metr_load.append((pathway, metric, max_load))
-            # print(max_t)
-            # if (max_load < min_load and hop < hop_am) or metric < min_metr:
-            #     min_load = max_load
-            #     min_metr = metric
-            #     hop_am = hop
-            #     min_path = pathway
-        # self.optimal_paths.append(min_path)
-        # print("OPT = ", mpath, ' ', min_load, min_metr, hop_am)
 
         def intersect_check(path, paths):
             count = 0
@@ -163,13 +155,6 @@ class FuzzyLogic:
         rating['big'] = fuzz.trimf(rating.universe, [50, 68, 84])
         rating['very_big'] = fuzz.trapmf(rating.universe, [68, 84, 100, 100])
 
-        # You can see how these look with .view()
-        #distance['middle'].view()
-
-        #load_coef.view()
-        #time.view()
-        #rating.view()
-        # tip.view()
         r1 = rule(load_coef['low'] & time['short'], rating['very_big'])
         r2 = rule(load_coef['low'] & time['average'], rating['very_big'])
         r3 = rule(load_coef['low'] & time['long'], rating['big'])
@@ -320,14 +305,6 @@ class Main(QMainWindow):
         n2_x = self.main_scene.selectedItems()[1].x()
         n2_y = self.main_scene.selectedItems()[1].y()
 
-        # if not self.main_scene.list_nodes_weights == []:
-        #     for item in self.main_scene.list_nodes_weights:
-        #         if n1 in item and n2 in item:
-        #             self.main_scene.list_nodes_weights.remove(item)
-        #             self.main_scene.list_nodes_weights.append([n1, n2, float(w1), float(w2),n1_x, n1_y,n2_x,n2_y])
-        #         else:
-        #             self.main_scene.list_nodes_weights.append([n1, n2, float(w1), float(w2),n1_x, n1_y,n2_x,n2_y])
-        # else:
         self.main_scene.list_nodes_weights.append([n1, n2, float(w1), float(w2),n1_x, n1_y,n2_x,n2_y])
         w1 = self.dialog.time_input.setText("")
         w2 = self.dialog.load_input.setText("")
@@ -521,37 +498,6 @@ class Main(QMainWindow):
 
         scen_items = self.main_scene.items()
         i = 0
-        # colors = [QColor(177, 255, 99), QColor(255, 255, 80), QColor(255, 192, 203), QColor(235, 181, 235),
-        #           QColor(255, 210, 0)]
-        #
-        # random.shuffle(colors)
-        # used_col = []
-        #
-        # def rand_col():
-        #
-        #     c = random.choice(colors)
-        #     if c not in used_col:
-        #         used_col.append(c)
-        #         return c
-        #     else:
-        #         return rand_col()
-
-        # for path, params in paths_params:
-            # st = path[0]
-            # ed = path[-1]
-            # col = QColor(144+i,238,144+i)
-            # col = rand_col()
-
-            # for item in scen_items:
-            #     if type(item) == QGraph_Vertex and item.id in path and not item.id == self.start_node and not item.id == self.end_node:
-            #         item.setBrush(col)
-            #         item.color = col
-            #     elif type(item) == QGraph_Vertex and item.id == self.start_node:
-            #         item.setBrush(QColor(240, 230, 140))
-            #         item.color = QColor(240, 230, 140)
-            #     elif type(item) == QGraph_Vertex and item.id == self.end_node:
-            #         item.setBrush(QColor(240, 230, 140))
-            #         item.color = QColor(240, 230, 140)
 
         for item in scen_items:
             if type(item) == QGraph_Edge:
@@ -586,8 +532,7 @@ class Main(QMainWindow):
                 p = p + k
             f = f'Path_{i} :\n  {p[:-3]}\n\nRating_{i} = {round(paths_and_rating[str(path)], 2)}%\nTime_Metric_{i} = {time}\nLoad_{i} = {load}\n\n'
             text_paths += f
-            # text_paths += 'Path'+ str(i) + ': ' + str(path) +'  ' + 'R' + '_' + str(i) + ' = ' + str(round(paths_and_rating[str(path)], 2)) + '% ' + '\n' + \
-            #               ' M' + str(i) + ' = ' + str(time) + '\n' + ' D' + str(i) + ' = ' + str(load) + '\n\n'
+            
         op = ['R'+str(i)+'-> ' for i in op_path]
         m = ''
         for t in op:
